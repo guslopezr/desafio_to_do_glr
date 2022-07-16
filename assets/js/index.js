@@ -3,19 +3,19 @@ const listadetareas = document.getElementById("tareas");
 const total = document.getElementById("total");
 
 const tareasCargadas = [{
-    id: Date.now(),
+    id: 1657477620278,
     tarea: "Revisar la guía semanal   ",
     estado: false,
 }, {
-    id: Date.now(),
+    id: 1657477620279,
     tarea: "Hacer los ejercicios de la guía   ",
     estado: false,
 }, {
-    id: Date.now(),
+    id: 1657477620280,
     tarea: "Buscar tutoriales   ",
     estado: false,
 }, {
-    id: Date.now(),
+    id: 1657477620281,
     tarea: "Leer libro de Javascript   ",
     estado: false,
 }];
@@ -42,7 +42,7 @@ function Agregar() {
     }
 }
 
-//Eliminación de tareas. Esta función permite borrar las tareas con id.
+//Eliminación de tareas.
 
 function borrar(id) {
     const index = tareasCargadas.findIndex((ele) => ele.id == id);
@@ -50,18 +50,18 @@ function borrar(id) {
     renderTareas();
 }
 
-// Función para mosstrar el estado de las tareas, definiendo variables específicas con LET
+// Estado de las tareas
+
 function renderTareas() {
     let html = "";
     let completadas = tareasCargadas.filter((completa) => completa.estado !== false); // Se filtran tareas completadas
     for (const t of tareasCargadas) {
 
-        //Se recorre el arreglo de tareas para validar si la tarea stá completada o no y marcarla visualmente;
 
         if (t.estado == false)
             html += `<li id="${t.id}">${t.id} - ${t.tarea}<span class="close" onclick=borrar(${t.id})><i class="fa-solid fa-trash-can"></i></span></li>`;
         else
-            html += `<li id="${t.id}" class="checked" >${t.id} - ${t.tarea}<span class="close" onclick=borrar(${t.id})><i class="fa-solid fa-trash-can"></i></span></li>`; // cuando el estado de la tarea es completado se asigana  la clase "checked" para mostrarla visualmenete marcada en el HTML
+            html += `<li id="${t.id}" class="checked" >${t.id} - ${t.tarea}<span class="close" onclick=borrar(${t.id})><i class="fa-solid fa-trash-can"></i></span></li>`;
     }
 
     tareas.innerHTML = html;
@@ -74,13 +74,11 @@ list.addEventListener(
     "click",
     function(ev) {
         if (ev.target.tagName === "LI") {
-            ev.target.classList.toggle("checked"); //Marcar checked a través de un cambio de clase
+            ev.target.classList.toggle("checked");
 
             for (let i = 0; i < tareasCargadas.length; i++) {
-                //Recorrido del arreglo de tareas
                 if (tareasCargadas[i].id === parseInt(ev.target.id)) {
-                    //se compara el indice del arreglo con el clickeado
-                    tareasCargadas[i].estado = !tareasCargadas[i].estado; //Una vez localizado se cambia el estado según se clickee sobre el elemento
+                    tareasCargadas[i].estado = !tareasCargadas[i].estado;
                 }
             }
         }
